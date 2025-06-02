@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import AnswersSection from "@/components/AnswersSection";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 
@@ -30,6 +31,7 @@ export default async function QuestionPage({
         </p>
         <p>{new Date(question.created_at).toLocaleDateString("tr-TR")}</p>
       </div>
+      <AnswersSection questionId={question.id} />
     </div>
   );
 }
