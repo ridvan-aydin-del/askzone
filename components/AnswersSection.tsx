@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import UpvoteButton from "./UpVoteButton";
 
 type Answer = {
   id: string;
@@ -14,9 +15,9 @@ type Answer = {
 export default function AnswersSection({ questionId }: { questionId: string }) {
   const [answers, setAnswers] = useState<Answer[]>([]);
 
-  // ✅ fetchAnswers fonksiyonu dışarı alındı ki hem useEffect'te hem onSubmit'te kullanabilelim
+  // fetchAnswers fonksiyonu dışarı alındı ki hem useEffect'te hem onSubmit'te kullanabilelim
   const fetchAnswers = async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from("answers")
       .select("*")
       .eq("question_id", questionId)
@@ -93,9 +94,12 @@ export default function AnswersSection({ questionId }: { questionId: string }) {
           <p className="text-gray-800 break-words whitespace-pre-wrap w-full">
             {answer.content}
           </p>
-          <p className="text-sm text-gray-600 text-right mt-2">
-            {new Date(answer.created_at).toLocaleDateString("tr-TR")}
-          </p>
+          <div className="flex justify-between items-center mt-2">
+            <p className="text-sm text-gray-500">
+              {new Date(answer.created_at).toLocaleDateString("tr-TR")}
+            </p>
+            <UpvoteButton answerId={answer.id} />
+          </div>
         </div>
       ))}
     </div>

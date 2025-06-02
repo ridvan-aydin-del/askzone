@@ -1,3 +1,4 @@
+import UpvoteButton from "@/components/UpVoteButton";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
@@ -24,13 +25,15 @@ export default async function Home() {
           <p className="text-sm text-gray-500 ">
             {new Date(question.created_at).toLocaleDateString("tr-TR")}
           </p>
-
-          <Link
-            href={`/questions/${question.id}`}
-            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm mt-2 inline-block"
-          >
-            Detay
-          </Link>
+          <div className="flex justify-between items-center mt-2">
+            <Link
+              href={`/questions/${question.id}`}
+              className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm mt-2 inline-block"
+            >
+              Detay
+            </Link>
+            <UpvoteButton questionId={question.id} />
+          </div>
         </div>
       ))}
     </div>

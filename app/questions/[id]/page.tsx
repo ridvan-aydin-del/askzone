@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import AnswersSection from "@/components/AnswersSection";
+import UpvoteButton from "@/components/UpVoteButton";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 
@@ -30,6 +31,7 @@ export default async function QuestionPage({
           {question.tags.join(", ")}
         </p>
         <p>{new Date(question.created_at).toLocaleDateString("tr-TR")}</p>
+        <UpvoteButton questionId={question.id} />
       </div>
       <AnswersSection questionId={question.id} />
     </div>

@@ -42,9 +42,11 @@ export default function Navbar() {
           {userEmail ? (
             <>
               <span className="text-gray-600">{userEmail}</span>
-              <button onClick={handleLogout} className="text-red-500">
-                Çıkış
-              </button>
+              <Link href="/login">
+                <button onClick={handleLogout} className="text-red-500">
+                  Çıkış
+                </button>
+              </Link>
             </>
           ) : (
             <>
